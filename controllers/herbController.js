@@ -4,6 +4,7 @@ const { getAllHerbs, getOneHerb } = require('../queries/herbs')
 
 herbs.get('/', async (req, res) => {
     const allHerbs = await getAllHerbs();
+    console.log(allHerbs)
     if(allHerbs[0]) {
         res.status(200).json(allHerbs)
     } else {
