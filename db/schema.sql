@@ -13,6 +13,6 @@ CREATE TABLE herbs (
     chakra TEXT, 
     element TEXT,
     tea BOOLEAN,
-    poisonous BOOLEAN NOT NULL,
+    poisonous BOOLEAN,
     stock INT NOT NULL
 );

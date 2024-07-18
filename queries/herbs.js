@@ -1,6 +1,6 @@
 const db = require('../db/dbConfig')
 
-//
+
 const getAllHerbs = async () => {
 
     try {
@@ -12,8 +12,8 @@ const getAllHerbs = async () => {
     return error 
     }
 }
-//
-const getOneHerb = async (id) => {
+
+const getOneHerb = async ( id ) => {
 
     try {
         const getHerbs = await db.one("SELECT * FROM herbs WHERE id=$1", id)
@@ -45,7 +45,7 @@ const createHerb = async( herb ) => {
 
 }
 
-const updateHerb = async (id, herb) => {
+const updateHerb = async ( id, herb ) => {
     try {
         const updatingHerb = await db.one(
             "UPDATE herbs SET name=$1, entry_date=$2, nutrients=$3, astrology_sign=$4, chakra=$5, element=$6, tea=$7, poisonous=$8, stock=$9 WHERE id=$10 RETURNING *",
@@ -69,9 +69,6 @@ const updateHerb = async (id, herb) => {
         throw error; 
     }
 };
-
-
-
 
 const removeHerb = async ( id ) => {
     try {

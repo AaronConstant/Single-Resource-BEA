@@ -2,9 +2,10 @@ const express = require('express');
 const herbs = express.Router();
 const { getAllHerbs, getOneHerb, createHerb, removeHerb, updateHerb } = require('../queries/herbs')
 
+const { checkBooleans, checkName } = require('../validations/checkHerbs.js')
+
 herbs.get('/', async (req, res) => {
     const allHerbs = await getAllHerbs();
-    console.log(allHerbs)
     if(allHerbs[0]) {
         res.status(200).json(allHerbs)
     } else {
@@ -25,7 +26,7 @@ herbs.get('/:id', async (req, res)=> {
 
 })
 
-herbs.post('/', async (req, res) => {
+herbs.post('/',checkBooleans, checkName, async (req, res) => {
     const addHerb = await createHerb(req.body)
     res.json(addHerb)
 
