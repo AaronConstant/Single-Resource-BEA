@@ -25,5 +25,15 @@ const getOneHerb = async (id) => {
     }
 }
 
+const createHerb = async(herb) => {
+    try {
+        const newHerb = await db.one('INSERT INTO herbs (name, nutrients, astrology_sign, chakra, element, tea, poisonous) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',[ herb.name,  herb.nutrients, herb.astrology_sign, herb.chakra,  herb.element, herb.tea, herb.poisonous ])
+        return newHerb
+    } catch(error) {
+        return error
+    }
 
-module.exports = { getAllHerbs, getOneHerb }
+}
+
+
+module.exports = { getAllHerbs, getOneHerb, createHerb }
