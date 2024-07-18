@@ -1,6 +1,6 @@
 \c herbs_dev
 
 INSERT INTO herbs (
-    name, nutrients, astrology_sign, chakra, element, tea, poisonous
+    name, entry_date, nutrients, astrology_sign, chakra, element, tea, poisonous, stock
 ) VALUES 
-('Basil', 'Vitamins C, Calcium, Iron, Vitamin D, Magnesium','Pisces, Aries','Solar Plexus','Fire', true, false);
+('Basil','10-12-2020', 'Vitamins C, Calcium, Iron, Vitamin D, Magnesium','Pisces, Aries','Solar Plexus','Fire', true, false, 10);

@@ -25,9 +25,19 @@ const getOneHerb = async (id) => {
     }
 }
 
-const createHerb = async(herb) => {
+const createHerb = async( herb ) => {
     try {
-        const newHerb = await db.one('INSERT INTO herbs (name, nutrients, astrology_sign, chakra, element, tea, poisonous) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',[ herb.name,  herb.nutrients, herb.astrology_sign, herb.chakra,  herb.element, herb.tea, herb.poisonous ])
+        const newHerb = await db.one('INSERT INTO herbs (name, entry_date, nutrients, astrology_sign, chakra, element, tea, poisonous, stock) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
+            [   herb.name, 
+                herb.entry_date,  
+                herb.nutrients, 
+                herb.astrology_sign, 
+                herb.chakra,  
+                herb.element, 
+                herb.tea, 
+                herb.poisonous, 
+                herb.stock 
+            ])
         return newHerb
     } catch(error) {
         return error
@@ -35,5 +45,40 @@ const createHerb = async(herb) => {
 
 }
 
+const updateHerb = async(id, herb) => {
+    try {
+    const updatingHerb = await db.one(
+        "UPDATE herbs SET name=$1, entry_date=$2, nutrients=$3, astrology_sign=$4, chakra=$5, element=$6, tea=$7, poisonous=$8, stock=$9 RETURNING *",
+        [   herb.name, 
+            herb.entry_date,  
+            herb.nutrients, 
+            herb.astrology_sign, 
+            herb.chakra,  
+            herb.element, 
+            herb.tea, 
+            herb.poisonous, 
+            herb.stock 
+        ])
 
-module.exports = { getAllHerbs, getOneHerb, createHerb }
+        return updatingHerb;
+
+    } catch( error ) {
+        return error
+    }
+}
+
+
+
+
+const removeHerb = async ( id ) => {
+    try {
+        const removedHerb = await db.one("DELETE FROM herbs WHERE id=$1 RETURNING *", id)
+        return removedHerb;
+    } catch(error) {
+        return error
+    }
+
+}
+
+
+module.exports = { getAllHerbs, getOneHerb, createHerb, removeHerb, updateHerb }

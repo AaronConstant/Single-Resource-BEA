@@ -7,10 +7,12 @@ CREATE DATABASE herbs_dev;
 CREATE TABLE herbs (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
-    nutrients TEXT,
+    entry_date DATE,
+    nutrients TEXT NOT NULL,
     astrology_sign TEXT,
     chakra TEXT, 
     element TEXT,
     tea BOOLEAN,
-    poisonous BOOLEAN
+    poisonous BOOLEAN NOT NULL,
+    stock INT NOT NULL
 );

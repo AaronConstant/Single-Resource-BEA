@@ -1,6 +1,6 @@
 const express = require('express');
 const herbs = express.Router();
-const { getAllHerbs, getOneHerb, createHerb } = require('../queries/herbs')
+const { getAllHerbs, getOneHerb, createHerb, removeHerb, updateHerb } = require('../queries/herbs')
 
 herbs.get('/', async (req, res) => {
     const allHerbs = await getAllHerbs();
@@ -29,6 +29,23 @@ herbs.post('/', async (req, res) => {
     const addHerb = await createHerb(req.body)
     res.json(addHerb)
 
+})
+
+herbs.put('/:id', async (req,res)=> {
+    const { id } = req.params;
+    
+    const updatingHerb = await updateHerb(id,req.body)
+
+    updatingHerb ? res.status(200).json(updatingHerb) : res.status(404).json({error: "An issue was encountered when updating Herb, Please check all entries and resbumit."})
+
+})
+
+herbs.delete('/:id', async (req,res) =>{
+    const { id } = req.params;
+    const removingHerb = await removeHerb(id)
+
+    removingHerb.id ?  res.status(200).json({ message: "Successfully Deleted Herb!" }) 
+    :  res.status(400).json({ error: "An error occurred finding Herb." })
 })
 
 
