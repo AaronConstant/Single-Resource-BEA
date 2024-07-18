@@ -35,17 +35,26 @@ herbs.put('/:id', async (req,res)=> {
     const { id } = req.params;
     
     const updatingHerb = await updateHerb(id,req.body)
+    // ternary 
+    updatingHerb ? 
 
-    updatingHerb ? res.status(200).json(updatingHerb) : res.status(404).json({error: "An issue was encountered when updating Herb, Please check all entries and resbumit."})
+    res.status(200).json(updatingHerb) 
+    : 
+    res.status(404).json({error: "An issue was encountered when updating Herb, Please check all entries and resbumit."})
+
 
 })
 
 herbs.delete('/:id', async (req,res) =>{
     const { id } = req.params;
     const removingHerb = await removeHerb(id)
+    // ternary
+    removingHerb.id ?  
+    
+    res.status(200).json({ message: "Successfully Deleted Herb!!!" }) 
+    :  
+    res.status(400).json({ error: "An error occurred finding Herb." })
 
-    removingHerb.id ?  res.status(200).json({ message: "Successfully Deleted Herb!" }) 
-    :  res.status(400).json({ error: "An error occurred finding Herb." })
 })
 
 

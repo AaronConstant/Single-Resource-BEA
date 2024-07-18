@@ -45,27 +45,30 @@ const createHerb = async( herb ) => {
 
 }
 
-const updateHerb = async(id, herb) => {
+const updateHerb = async (id, herb) => {
     try {
-    const updatingHerb = await db.one(
-        "UPDATE herbs SET name=$1, entry_date=$2, nutrients=$3, astrology_sign=$4, chakra=$5, element=$6, tea=$7, poisonous=$8, stock=$9 RETURNING *",
-        [   herb.name, 
-            herb.entry_date,  
-            herb.nutrients, 
-            herb.astrology_sign, 
-            herb.chakra,  
-            herb.element, 
-            herb.tea, 
-            herb.poisonous, 
-            herb.stock 
-        ])
+        const updatingHerb = await db.one(
+            "UPDATE herbs SET name=$1, entry_date=$2, nutrients=$3, astrology_sign=$4, chakra=$5, element=$6, tea=$7, poisonous=$8, stock=$9 WHERE id=$10 RETURNING *",
+            [
+                herb.name,
+                herb.entry_date,
+                herb.nutrients,
+                herb.astrology_sign,
+                herb.chakra,
+                herb.element,
+                herb.tea,
+                herb.poisonous,
+                herb.stock,
+                id
+            ]
+        );
 
         return updatingHerb;
-
-    } catch( error ) {
-        return error
+    } catch (error) {
+        console.error('Error updating herb:', error);
+        throw error; 
     }
-}
+};
 
 
 
