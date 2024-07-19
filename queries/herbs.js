@@ -28,7 +28,8 @@ const getOneHerb = async ( id ) => {
 const createHerb = async( herb ) => {
     try {
         const newHerb = await db.one('INSERT INTO herbs (name, entry_date, nutrients, astrology_sign, chakra, element, tea, poisonous, stock) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
-            [   herb.name, 
+            [   
+                herb.name, 
                 herb.entry_date,  
                 herb.nutrients, 
                 herb.astrology_sign, 

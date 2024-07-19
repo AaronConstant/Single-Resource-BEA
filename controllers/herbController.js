@@ -2,7 +2,7 @@ const express = require('express');
 const herbs = express.Router();
 const { getAllHerbs, getOneHerb, createHerb, removeHerb, updateHerb } = require('../queries/herbs')
 
-const { checkBooleans, checkName } = require('../validations/checkHerbs.js')
+const { checkBooleans, checkName, checkAstrology } = require('../validations/checkHerbs.js')
 
 herbs.get('/', async (req, res) => {
     const allHerbs = await getAllHerbs();
@@ -26,7 +26,7 @@ herbs.get('/:id', async (req, res)=> {
 
 })
 
-herbs.post('/',checkBooleans, checkName, async (req, res) => {
+herbs.post('/',checkBooleans, checkName,checkAstrology, async (req, res) => {
     const addHerb = await createHerb(req.body)
     res.json(addHerb)
 
@@ -34,7 +34,6 @@ herbs.post('/',checkBooleans, checkName, async (req, res) => {
 
 herbs.put('/:id', async (req,res)=> {
     const { id } = req.params;
-    
     const updatingHerb = await updateHerb(id,req.body)
     // ternary 
     updatingHerb ? 
