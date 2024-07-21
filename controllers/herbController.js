@@ -26,7 +26,7 @@ herbs.get('/:id', async (req, res)=> {
 
 })
 
-herbs.post('/',checkBooleans, checkName,checkAstrology, async (req, res) => {
+herbs.post('/',checkBooleans, checkName, checkAstrology, async (req, res) => {
     const addHerb = await createHerb(req.body)
     res.json(addHerb)
 

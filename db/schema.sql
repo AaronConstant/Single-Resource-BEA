@@ -6,8 +6,9 @@ CREATE DATABASE herbs_dev;
 
 CREATE TABLE herbs (
     id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL,
-    entry_date DATE,
+    name VARCHAR(100) NOT NULL,
+    entry_date TEXT NOT NULL,
+    pic TEXT NOT NULL,
     nutrients TEXT NOT NULL,
     astrology_sign TEXT,
     chakra TEXT, 

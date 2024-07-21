@@ -27,10 +27,10 @@ const getOneHerb = async ( id ) => {
 
 const createHerb = async( herb ) => {
     try {
-        const newHerb = await db.one('INSERT INTO herbs (name, entry_date, nutrients, astrology_sign, chakra, element, tea, poisonous, stock) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
-            [   
-                herb.name, 
-                herb.entry_date,  
+        const newHerb = await db.one('INSERT INTO herbs (name, entry_date, pic, nutrients, astrology_sign, chakra, element, tea, poisonous, stock) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
+            [   herb.name, 
+                herb.entry_date,
+                herb.pic,  
                 herb.nutrients, 
                 herb.astrology_sign, 
                 herb.chakra,  
@@ -49,7 +49,7 @@ const createHerb = async( herb ) => {
 const updateHerb = async ( id, herb ) => {
     try {
         const updatingHerb = await db.one(
-            "UPDATE herbs SET name=$1, entry_date=$2, nutrients=$3, astrology_sign=$4, chakra=$5, element=$6, tea=$7, poisonous=$8, stock=$9 WHERE id=$10 RETURNING *",
+            "UPDATE herbs SET name=$1, entry_date=$2, pic=$3, nutrients=$4, astrology_sign=$5, chakra=$6, element=$7, tea=$8, poisonous=$9, stock=$10 WHERE id=$11 RETURNING *",
             [
                 herb.name,
                 herb.entry_date,
