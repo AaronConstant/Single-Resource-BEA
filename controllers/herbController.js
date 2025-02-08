@@ -5,14 +5,18 @@ const { getAllHerbs, getOneHerb, createHerb, removeHerb, updateHerb } = require(
 const { checkBooleans, checkName, checkAstrology } = require('../validations/checkHerbs.js')
 
 herbs.get('/', async (req, res) => {
-    const allHerbs = await getAllHerbs();
-    if(allHerbs[0]) {
-        res.status(200).json(allHerbs)
-    } else {
-        res.status(500).json({error: "Server Malfunction"})
+    try {
+        const allHerbs = await getAllHerbs();
+        if(Array.isArray(allHerbs)) {
+            res.status(200).json(allHerbs);
+        } else {
+            throw new Error('Invalid data format from database');
+        }
+    } catch (error) {
+        console.error('Error in GET /herbs:', error);
+        res.status(500).json({ error: "Server Malfunction" });
     }
-
-})
+});
 
 herbs.get('/:id', async (req, res)=> {
     const { id } = req.params;
