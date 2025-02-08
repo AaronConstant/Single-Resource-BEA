@@ -35,7 +35,7 @@ herbs.post('/',checkBooleans, checkName, checkAstrology, async (req, res) => {
 herbs.put('/:id', async (req,res)=> {
     const { id } = req.params;
     const updatingHerb = await updateHerb(id,req.body)
-    // ternary 
+
     updatingHerb ? 
 
     res.status(200).json(updatingHerb) 

@@ -46,13 +46,14 @@ const createHerb = async( herb ) => {
 
 }
 
-const updateHerb = async ( id, herb ) => {
+const updateHerb = async (id, herb) => {
     try {
         const updatingHerb = await db.one(
             "UPDATE herbs SET name=$1, entry_date=$2, pic=$3, nutrients=$4, astrology_sign=$5, chakra=$6, element=$7, tea=$8, poisonous=$9, stock=$10 WHERE id=$11 RETURNING *",
             [
                 herb.name,
                 herb.entry_date,
+                herb.pic,
                 herb.nutrients,
                 herb.astrology_sign,
                 herb.chakra,
@@ -82,4 +83,4 @@ const removeHerb = async ( id ) => {
 }
 
 
-module.exports = { getAllHerbs, getOneHerb, createHerb, removeHerb, updateHerb }
+module.exports = { getAllHerbs, getOneHerb, createHerb, removeHerb, updateHerb }    

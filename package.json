@@ -13,9 +13,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "pg-promise": "^11.9.1"
+    "node.js": "^0.0.1-security",
+    "pg-promise": "^11.9.1",
+    "require": "^2.4.20"
   }
 }
